@@ -6,6 +6,8 @@ import { useState, useRef, useEffect } from "react";
 import { NAV_ITEMS, type NavItem } from "~/lib/constants";
 import { useCart } from "~/components/cart/cart-provider";
 import { PixelCoin } from "~/components/ui/pixel-coin";
+import { useTheme } from "~/components/theme/theme-provider";
+import { SearchIcon, CartIcon, MenuIcon, CloseIcon } from "~/components/ui/icons";
 import { cn } from "~/lib/cn";
 
 function DesktopDropdown({ item }: { item: NavItem }) {
@@ -46,7 +48,7 @@ function DesktopDropdown({ item }: { item: NavItem }) {
       </Link>
 
       {open && (
-        <div className="absolute top-full left-0 z-50 mt-1 w-64 border-theme bg-theme-surface shadow-theme">
+        <div className="nav-dropdown absolute top-full left-0 z-50 mt-1 w-64 border-theme bg-theme-surface shadow-theme">
           <ul className="py-1">
             {item.children!.map((child) => (
               <li key={child.href}>
@@ -75,9 +77,11 @@ function DesktopDropdown({ item }: { item: NavItem }) {
 function MobileDropdown({
   item,
   onNavigate,
+  isRetro,
 }: {
   item: NavItem;
   onNavigate: () => void;
+  isRetro: boolean;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -87,8 +91,12 @@ function MobileDropdown({
         onClick={() => setOpen(!open)}
         className="flex w-full cursor-pointer items-center justify-between py-1 font-body text-sm text-theme-text hover:text-theme-accent transition-theme"
       >
-        <span>{">"} {item.label}</span>
-        <span className="text-theme-text-muted">{open ? "[-]" : "[+]"}</span>
+        <span>{isRetro ? <>{">"} {item.label}</> : item.label}</span>
+        <span className="text-theme-text-muted">
+          {isRetro
+            ? open ? "[-]" : "[+]"
+            : open ? "\u2212" : "+"}
+        </span>
       </button>
       <ul
         className={cn(
@@ -117,6 +125,8 @@ export function Header() {
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme } = useTheme();
+  const isRetro = theme === "retro";
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -136,7 +146,7 @@ export function Header() {
             href="/"
             className="flex items-center gap-2 transition-theme hover:opacity-80"
           >
-            <PixelCoin size={28} />
+            {isRetro && <PixelCoin size={28} />}
             <span className="text-heading-lg text-theme-text">HuffCards</span>
           </Link>
 
@@ -148,13 +158,13 @@ export function Header() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search cards..."
-                className="w-full border-theme bg-theme-input px-4 py-2 pr-10 font-body text-sm text-theme-text placeholder:text-theme-text-muted focus:outline-none focus:ring-2 focus:ring-theme-ring transition-theme"
+                className="header-search-input w-full border-theme bg-theme-input px-4 py-2 pr-10 font-body text-sm text-theme-text placeholder:text-theme-text-muted focus:outline-none focus:ring-2 focus:ring-theme-ring transition-theme"
               />
               <button
                 type="submit"
                 className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer font-body text-theme-text-secondary hover:text-theme-accent transition-theme"
               >
-                [/]
+                {isRetro ? "[/]" : <SearchIcon size={18} />}
               </button>
             </div>
           </form>
@@ -171,14 +181,27 @@ export function Header() {
               href="/cart"
               className="relative font-body text-sm font-bold text-theme-text hover:text-theme-accent transition-theme"
             >
-              Cart [{itemCount}]
+              {isRetro ? (
+                <>Cart [{itemCount}]</>
+              ) : (
+                <div className="relative">
+                  <CartIcon size={20} />
+                  {itemCount > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[var(--theme-accent-primary)] text-[10px] font-bold text-[var(--theme-accent-text-on-primary)]">
+                      {itemCount}
+                    </span>
+                  )}
+                </div>
+              )}
             </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="cursor-pointer font-body text-lg text-theme-text md:hidden"
               aria-label="Toggle menu"
             >
-              {mobileOpen ? "[X]" : "[=]"}
+              {isRetro
+                ? mobileOpen ? "[X]" : "[=]"
+                : mobileOpen ? <CloseIcon size={22} /> : <MenuIcon size={22} />}
             </button>
           </div>
         </div>
@@ -213,7 +236,7 @@ export function Header() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search cards..."
-              className="w-full border-theme bg-theme-input px-4 py-2 font-body text-sm text-theme-text placeholder:text-theme-text-muted focus:outline-none focus:ring-2 focus:ring-theme-ring"
+              className="header-search-input w-full border-theme bg-theme-input px-4 py-2 font-body text-sm text-theme-text placeholder:text-theme-text-muted focus:outline-none focus:ring-2 focus:ring-theme-ring"
             />
           </form>
           <nav className="px-4 pb-4">
@@ -224,6 +247,7 @@ export function Header() {
                     key={item.href}
                     item={item}
                     onNavigate={() => setMobileOpen(false)}
+                    isRetro={isRetro}
                   />
                 ) : (
                   <li key={item.href}>
@@ -232,7 +256,7 @@ export function Header() {
                       onClick={() => setMobileOpen(false)}
                       className="block py-1 font-body text-sm text-theme-text hover:text-theme-accent transition-theme"
                     >
-                      {">"} {item.label}
+                      {isRetro ? <>{">"} {item.label}</> : item.label}
                     </Link>
                   </li>
                 ),
@@ -243,7 +267,7 @@ export function Header() {
                   onClick={() => setMobileOpen(false)}
                   className="block py-1 font-body text-sm text-theme-text hover:text-theme-accent transition-theme"
                 >
-                  {">"} Login
+                  {isRetro ? <>{">"} Login</> : "Login"}
                 </Link>
               </li>
             </ul>

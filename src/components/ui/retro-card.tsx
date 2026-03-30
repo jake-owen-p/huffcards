@@ -14,8 +14,7 @@ export function RetroCard({
     <div
       className={cn(
         "border-theme rounded-theme bg-theme-surface shadow-theme",
-        hover &&
-          "transition-theme hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-theme-sm",
+        hover && "retro-card-hover transition-theme",
         className,
       )}
       {...props}

@@ -16,7 +16,11 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
         </li>
         {items.map((item, i) => (
           <li key={i} className="flex items-center gap-1">
-            <span aria-hidden="true">{" > "}</span>
+            <span aria-hidden="true">
+              <span className="retro-only">{" > "}</span>
+              <span className="catalogue-only">{" / "}</span>
+              <span className="vault-only">{" · "}</span>
+            </span>
             {item.href ? (
               <Link href={item.href} className="hover:text-theme-accent transition-theme">
                 {item.label}

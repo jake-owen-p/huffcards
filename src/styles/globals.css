@@ -338,16 +338,106 @@
   .text-heading-3xl { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-3xl); line-height: 1.1; }
 }
 
-/* Retro-only: hide on other themes */
+/* =============================================
+   THEME VISIBILITY HELPERS
+   ============================================= */
 [data-theme="catalogue"] .retro-only,
-[data-theme="vault"] .retro-only { display: none; }
+[data-theme="vault"] .retro-only { display: none !important; }
 
-/* Catalogue: card hover lift */
-[data-theme="catalogue"] .card-hover:hover { transform: translateY(-4px); }
+.catalogue-only, .catalogue-only-block { display: none !important; }
+[data-theme="catalogue"] .catalogue-only { display: inline !important; }
+[data-theme="catalogue"] .catalogue-only-block { display: block !important; }
 
-/* Vault: gold glow on card hover */
-[data-theme="vault"] .card-hover:hover { box-shadow: 0 0 25px rgba(201, 168, 76, 0.2); }
+.vault-only, .vault-only-block { display: none !important; }
+[data-theme="vault"] .vault-only { display: inline !important; }
+[data-theme="vault"] .vault-only-block { display: block !important; }
 
+[data-theme="catalogue"] .catalogue-hide { display: none !important; }
+[data-theme="vault"] .vault-hide { display: none !important; }
+
+/* =============================================
+   RETRO: Button & Card behaviors (default)
+   ============================================= */
+:root .retro-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+:root .retro-card-hover:hover {
+  transform: translate(1px, 1px);
+}
+
+/* =============================================
+   CATALOGUE: Structural CSS
+   ============================================= */
+[data-theme="catalogue"] .retro-btn:active {
+  transform: scale(0.97) !important;
+  box-shadow: none;
+  opacity: 0.9;
+}
+[data-theme="catalogue"] .retro-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.12);
+}
+[data-theme="catalogue"] .card-image-wrap .card-quick-view {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+[data-theme="catalogue"] .card-image-wrap:hover .card-quick-view {
+  opacity: 1;
+}
+[data-theme="catalogue"] .header-search-input {
+  border-radius: 999px !important;
+  padding-left: 2.5rem !important;
+}
+[data-theme="catalogue"] .nav-dropdown {
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+[data-theme="catalogue"] .price-current.has-discount {
+  color: #dc2626;
+}
+.sticky-atc-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  background: var(--theme-bg-surface);
+  border-top: 1px solid var(--theme-border-primary);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+}
+.sticky-atc-bar.visible {
+  transform: translateY(0);
+}
+
+/* =============================================
+   VAULT: Structural CSS
+   ============================================= */
+[data-theme="vault"] .retro-btn:active {
+  transform: scale(0.98) !important;
+  box-shadow: none;
+}
+[data-theme="vault"] .retro-card-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(201, 168, 76, 0.2);
+}
+[data-theme="vault"] .vault-hero-glow {
+  background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
+}
+.vault-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+  border: none;
+  margin: 2rem 0;
+}
+[data-theme="vault"] .vault-card-minimal .card-description,
+[data-theme="vault"] .vault-card-minimal .card-badges,
+[data-theme="vault"] .vault-card-minimal .card-stock {
+  display: none;
+}
 
 /* =============================================
    ANIMATIONS & SCROLLBAR

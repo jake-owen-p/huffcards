@@ -7,14 +7,17 @@ import { CartSummary } from "~/components/cart/cart-summary";
 import { Breadcrumbs } from "~/components/layout/breadcrumbs";
 import { RetroButton } from "~/components/ui/retro-button";
 import { PixelCoin } from "~/components/ui/pixel-coin";
+import { useTheme } from "~/components/theme/theme-provider";
 
 export default function CartPage() {
   const { items, clearCart } = useCart();
+  const { theme } = useTheme();
+  const isVault = theme === "vault";
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
       <Breadcrumbs items={[{ label: "Cart" }]} />
-      <h1 className="text-heading-xl mb-8 text-theme-text">Your Cart</h1>
+      <h1 className="text-heading-xl mb-8 text-theme-text">{isVault ? "Your Collection" : "Your Cart"}</h1>
 
       {items.length === 0 ? (
         <div className="border-theme bg-theme-surface p-12 text-center">
@@ -22,10 +25,10 @@ export default function CartPage() {
             <PixelCoin size={48} className="opacity-30" />
           </div>
           <p className="text-heading-sm mb-2 text-theme-text-muted">
-            Your cart is empty
+            {isVault ? "Your collection is empty" : "Your cart is empty"}
           </p>
           <p className="mb-6 font-body text-sm text-theme-text-muted">
-            Looks like you haven&apos;t added any cards yet.
+            Looks like you haven&apos;t added any {isVault ? "pieces" : "cards"} yet.
           </p>
           <Link href="/pokemon">
             <RetroButton variant="primary">Browse Cards</RetroButton>

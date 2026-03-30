@@ -15,9 +15,8 @@ export function RetroButton({
   return (
     <button
       className={cn(
-        "inline-flex cursor-pointer items-center justify-center font-body font-bold transition-theme",
+        "retro-btn inline-flex cursor-pointer items-center justify-center font-body font-bold transition-theme",
         "border-theme",
-        "active:translate-x-[2px] active:translate-y-[2px] active:shadow-none",
         variant === "primary" &&
           "border-[var(--theme-btn-primary-border)] bg-theme-btn-primary text-theme-btn-primary-text shadow-theme hover:shadow-theme-hover rounded-theme-sm",
         variant === "secondary" &&

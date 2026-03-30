@@ -2,6 +2,8 @@
 
 import { createContext, useCallback, useContext, useState } from "react";
 import { cn } from "~/lib/cn";
+import { useTheme } from "~/components/theme/theme-provider";
+import { CheckIcon, InfoIcon, WarningIcon } from "~/components/ui/icons";
 
 type Toast = {
   id: number;
@@ -25,6 +27,8 @@ let toastId = 0;
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const { theme } = useTheme();
+  const isRetro = theme === "retro";
 
   const addToast = useCallback(
     (message: string, type: Toast["type"] = "success") => {
@@ -55,9 +59,9 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             )}
           >
             <span className="mr-2">
-              {toast.type === "success" && "+"}
-              {toast.type === "info" && ">"}
-              {toast.type === "error" && "!"}
+              {toast.type === "success" && (isRetro ? "+" : <CheckIcon size={14} />)}
+              {toast.type === "info" && (isRetro ? ">" : <InfoIcon size={14} />)}
+              {toast.type === "error" && (isRetro ? "!" : <WarningIcon size={14} />)}
             </span>
             {toast.message}
           </div>

@@ -12,13 +12,14 @@ export function PriceDisplay({
   size?: "sm" | "md" | "lg";
   className?: string;
 }) {
-  const hasDiscount = originalPrice && originalPrice > price;
+  const hasDiscount = originalPrice !== undefined && originalPrice > price;
 
   return (
     <div className={cn("flex items-baseline gap-2", className)}>
       <span
         className={cn(
-          "font-body font-bold text-theme-price",
+          "price-current font-body font-bold text-theme-price",
+          hasDiscount && "has-discount",
           size === "sm" && "text-sm",
           size === "md" && "text-lg",
           size === "lg" && "text-2xl",
