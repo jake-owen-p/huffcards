@@ -29,6 +29,8 @@ export type Product = {
   isNew: boolean;
   image: string; // path in /public, e.g. "/products/pokemon/123.png"
   relatedProductIds: string[];
+  rating?: number; // 3.5 – 5.0, seeded deterministically from id
+  reviewCount?: number; // 8 – 520, seeded deterministically from id
 };
 
 export type CategoryMeta = {

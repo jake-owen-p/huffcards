@@ -6,7 +6,7 @@ import { RetroCard } from "~/components/ui/retro-card";
 import { RetroButton } from "~/components/ui/retro-button";
 import { RetroInput } from "~/components/ui/retro-input";
 import { useToast } from "~/components/ui/toast";
-import { PixelCoin } from "~/components/ui/pixel-coin";
+import { HuffcardsMark } from "~/components/ui/brand-icons";
 
 export default function LoginPage() {
   const { addToast } = useToast();
@@ -20,10 +20,10 @@ export default function LoginPage() {
     <div className="mx-auto flex min-h-[60vh] max-w-md items-center px-4 py-16">
       <RetroCard className="w-full p-8">
         <div className="mb-6 text-center">
-          <PixelCoin size={32} className="mx-auto mb-3" />
-          <h1 className="text-heading-lg text-theme-text">Login</h1>
-          <p className="mt-2 font-body text-xs text-theme-text-secondary">
-            Welcome back, trainer!
+          <HuffcardsMark size={44} className="mx-auto mb-4" />
+          <h1 className="text-heading-lg text-theme-text">Welcome back</h1>
+          <p className="mt-2 font-body text-sm text-theme-text-secondary">
+            Sign in to your HuffCards account.
           </p>
         </div>
 

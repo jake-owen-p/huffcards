@@ -4,10 +4,42 @@ import { pokemonProducts } from "./pokemon";
 import { yugiohProducts } from "./yugioh";
 import { magicProducts } from "./magic";
 
+// Deterministic rating + review count seeded from the product id, so
+// values are stable across reloads without needing a real review system.
+function hashString(s: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+function seedRating(id: string): number {
+  const h = hashString(id + ":rating");
+  // Bias toward 4.0 – 5.0 (real stores rarely show sub-4 averages)
+  const r = 3.8 + (h % 121) / 100; // 3.80 – 5.00
+  return Math.round(r * 10) / 10;
+}
+
+function seedReviewCount(id: string): number {
+  const h = hashString(id + ":reviews");
+  // Spread between 12 and 520 with a long tail
+  return 12 + (h % 509);
+}
+
+function enrich(product: Product): Product {
+  return {
+    ...product,
+    rating: seedRating(product.id),
+    reviewCount: seedReviewCount(product.id),
+  };
+}
+
 export const allProducts: Product[] = [
-  ...pokemonProducts,
-  ...yugiohProducts,
-  ...magicProducts,
+  ...pokemonProducts.map(enrich),
+  ...yugiohProducts.map(enrich),
+  ...magicProducts.map(enrich),
 ];
 
 export const categories: CategoryMeta[] = categoryData.map((cat) => ({
@@ -23,9 +55,11 @@ export function getProductsByCategory(
   category: Category,
   options?: {
     productType?: ProductType;
+    productTypes?: ProductType[];
     sort?: "price-asc" | "price-desc" | "name" | "newest";
     minPrice?: number;
     maxPrice?: number;
+    inStockOnly?: boolean;
     limit?: number;
     offset?: number;
   },
@@ -35,11 +69,18 @@ export function getProductsByCategory(
   if (options?.productType) {
     filtered = filtered.filter((p) => p.productType === options.productType);
   }
+  if (options?.productTypes && options.productTypes.length > 0) {
+    const set = new Set(options.productTypes);
+    filtered = filtered.filter((p) => set.has(p.productType));
+  }
   if (options?.minPrice !== undefined) {
     filtered = filtered.filter((p) => p.price >= options.minPrice!);
   }
   if (options?.maxPrice !== undefined) {
     filtered = filtered.filter((p) => p.price <= options.maxPrice!);
+  }
+  if (options?.inStockOnly) {
+    filtered = filtered.filter((p) => p.inStock);
   }
 
   const total = filtered.length;

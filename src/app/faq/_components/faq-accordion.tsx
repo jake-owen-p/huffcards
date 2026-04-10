@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { cn } from "~/lib/cn";
-import { useTheme } from "~/components/theme/theme-provider";
 
 export function FaqAccordion({
   question,
@@ -12,8 +11,6 @@ export function FaqAccordion({
   answer: string;
 }) {
   const [open, setOpen] = useState(false);
-  const { theme } = useTheme();
-  const isRetro = theme === "retro";
 
   return (
     <div className="border-theme bg-theme-surface">
@@ -25,7 +22,7 @@ export function FaqAccordion({
           {question}
         </span>
         <span className="ml-4 shrink-0 font-body text-theme-text-secondary">
-          {isRetro ? (open ? "[-]" : "[+]") : (open ? "\u2212" : "+")}
+          {open ? "\u2212" : "+"}
         </span>
       </button>
       <div

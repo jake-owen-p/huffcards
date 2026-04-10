@@ -1,226 +1,119 @@
 @import "tailwindcss";
 
 /* =============================================
-   DEFAULT THEME: Retro Pixel
+   THEME TOKENS — Parchment & Ember
    ============================================= */
 :root {
-  --theme-bg-page: #fdf6e3;
-  --theme-bg-surface: #fefcf3;
-  --theme-bg-surface-alt: #fdf6e3;
-  --theme-bg-surface-hover: #f5e6c8;
-  --theme-bg-elevated: #fefcf3;
-  --theme-bg-footer: #1a1a2e;
-  --theme-bg-input: #fefcf3;
-  --theme-bg-input-focus: #fdf6e3;
-  --theme-text-primary: #2c1810;
-  --theme-text-secondary: #b8944f;
-  --theme-text-muted: #d4b978;
-  --theme-text-inverted: #fdf6e3;
-  --theme-text-footer: #ebd5a7;
-  --theme-text-footer-heading: #fdf6e3;
-  --theme-text-footer-muted: #b8944f;
-  --theme-accent-primary: #f39c12;
-  --theme-accent-primary-hover: #e08e0b;
-  --theme-accent-secondary: #3e2723;
-  --theme-accent-text-on-primary: #2c1810;
-  --theme-border-primary: #8b6914;
-  --theme-border-secondary: #ebd5a7;
-  --theme-border-input: #8b6914;
-  --theme-ring-focus: #f39c12;
-  --theme-shadow-color: #3e2723;
-  --theme-badge-bg: #f5e6c8;
-  --theme-badge-border: #8b6914;
-  --theme-badge-text: #2c1810;
-  --theme-success: #27ae60;
-  --theme-warning: #f39c12;
-  --theme-error: #c0392b;
-  --theme-info: #2a75bb;
-  --theme-price-color: #3e2723;
-  --theme-scrollbar-track: #f5e6c8;
-  --theme-scrollbar-thumb: #b8944f;
-  --theme-selection-bg: #f39c12;
-  --theme-selection-text: #2c1810;
-  --theme-btn-primary-bg: #f39c12;
-  --theme-btn-primary-text: #2c1810;
-  --theme-btn-primary-border: #8b6914;
-  --theme-btn-secondary-bg: #fefcf3;
-  --theme-btn-secondary-text: #2c1810;
-  --theme-font-heading: var(--font-press-start), "Press Start 2P", monospace;
-  --theme-font-body: "Courier New", Courier, monospace;
-  --theme-border-width: 2px;
-  --theme-border-style: dashed;
-  --theme-radius-sm: 0px;
-  --theme-radius-md: 0px;
-  --theme-radius-lg: 0px;
-  --theme-shadow-sm: 2px 2px 0px;
-  --theme-shadow-md: 4px 4px 0px;
-  --theme-shadow-hover: 2px 2px 0px;
-  --theme-transition-timing: cubic-bezier(0.19, 1, 0.22, 1);
-  --theme-transition-duration: 0.25s;
-  --theme-heading-weight: 400;
-  --theme-heading-tracking: normal;
-  --theme-body-line-height: 1.6;
-  --theme-grid-gap: 1.5rem;
-  --theme-card-padding: 1rem;
-  --theme-heading-size-xs: 8px;
-  --theme-heading-size-sm: 10px;
-  --theme-heading-size-base: 12px;
-  --theme-heading-size-lg: 16px;
-  --theme-heading-size-xl: 20px;
-  --theme-heading-size-2xl: 24px;
-  --theme-heading-size-3xl: 32px;
-}
+  /* Brand palette */
+  --parchment-base: #fdf8f0;
+  --parchment-surface: #f5ecda;
+  --ember-primary: #c15c0a;
+  --ember-primary-hover: #a44a05;
+  --ember-dark: #7a4f1e;
+  --ember-success: #3cb878;
+  --ink: #1e1208;
 
-/* =============================================
-   CATALOGUE STORE — Bright, Shopify-polished
-   ============================================= */
-[data-theme="catalogue"] {
-  --theme-bg-page: #ffffff;
-  --theme-bg-surface: #ffffff;
-  --theme-bg-surface-alt: #f8f9fa;
-  --theme-bg-surface-hover: #f1f3f5;
-  --theme-bg-elevated: #ffffff;
-  --theme-bg-footer: #111827;
-  --theme-bg-input: #ffffff;
-  --theme-bg-input-focus: #f8f9fa;
-  --theme-text-primary: #111827;
-  --theme-text-secondary: #6b7280;
-  --theme-text-muted: #9ca3af;
-  --theme-text-inverted: #ffffff;
-  --theme-text-footer: #d1d5db;
-  --theme-text-footer-heading: #f9fafb;
-  --theme-text-footer-muted: #6b7280;
-  --theme-accent-primary: #2563eb;
-  --theme-accent-primary-hover: #1d4ed8;
-  --theme-accent-secondary: #e5e7eb;
+  /* Derived backgrounds */
+  --theme-bg-page: var(--parchment-base);
+  --theme-bg-surface: #fffbf3;
+  --theme-bg-surface-alt: var(--parchment-surface);
+  --theme-bg-surface-hover: #ebe0c5;
+  --theme-bg-elevated: #fffbf3;
+  --theme-bg-footer: var(--ink);
+  --theme-bg-input: #fffbf3;
+  --theme-bg-input-focus: var(--parchment-base);
+
+  /* Text */
+  --theme-text-primary: var(--ink);
+  --theme-text-secondary: #6b4a28;
+  --theme-text-muted: #9a8260;
+  --theme-text-inverted: var(--parchment-base);
+  --theme-text-footer: #d4c3a0;
+  --theme-text-footer-heading: var(--parchment-base);
+  --theme-text-footer-muted: #8a7550;
+
+  /* Accents */
+  --theme-accent-primary: var(--ember-primary);
+  --theme-accent-primary-hover: var(--ember-primary-hover);
+  --theme-accent-secondary: var(--ember-dark);
   --theme-accent-text-on-primary: #ffffff;
-  --theme-border-primary: #e5e7eb;
-  --theme-border-secondary: #f3f4f6;
-  --theme-border-input: #d1d5db;
-  --theme-ring-focus: #2563eb;
-  --theme-shadow-color: rgba(0, 0, 0, 0.08);
-  --theme-badge-bg: #f3f4f6;
-  --theme-badge-border: #e5e7eb;
-  --theme-badge-text: #374151;
-  --theme-success: #16a34a;
-  --theme-warning: #ca8a04;
-  --theme-error: #dc2626;
-  --theme-info: #2563eb;
-  --theme-price-color: #111827;
-  --theme-scrollbar-track: #f3f4f6;
-  --theme-scrollbar-thumb: #d1d5db;
-  --theme-selection-bg: #2563eb;
+
+  /* Borders */
+  --theme-border-primary: #e3d6b5;
+  --theme-border-secondary: #eee3c7;
+  --theme-border-input: #d4c29a;
+  --theme-ring-focus: var(--ember-primary);
+
+  /* Shadows — warm drop */
+  --theme-shadow-color: rgba(30, 18, 8, 0.10);
+  --theme-shadow-sm: 0 1px 2px 0;
+  --theme-shadow-md: 0 10px 30px -10px;
+  --theme-shadow-hover: 0 18px 44px -14px;
+
+  /* Badges */
+  --theme-badge-bg: var(--parchment-surface);
+  --theme-badge-border: #e3d6b5;
+  --theme-badge-text: var(--ember-dark);
+
+  /* Status */
+  --theme-success: var(--ember-success);
+  --theme-warning: #c9890a;
+  --theme-error: #b83216;
+  --theme-info: var(--ember-dark);
+
+  /* Price */
+  --theme-price-color: var(--ink);
+
+  /* Scrollbar */
+  --theme-scrollbar-track: var(--parchment-surface);
+  --theme-scrollbar-thumb: #c9b486;
+
+  /* Selection */
+  --theme-selection-bg: var(--ember-primary);
   --theme-selection-text: #ffffff;
-  --theme-btn-primary-bg: #2563eb;
+
+  /* Buttons */
+  --theme-btn-primary-bg: var(--ember-primary);
   --theme-btn-primary-text: #ffffff;
-  --theme-btn-primary-border: #2563eb;
-  --theme-btn-secondary-bg: #ffffff;
-  --theme-btn-secondary-text: #374151;
-  --theme-font-heading: var(--font-geist-sans), system-ui, sans-serif;
-  --theme-font-body: var(--font-geist-sans), system-ui, sans-serif;
+  --theme-btn-primary-border: var(--ember-primary);
+  --theme-btn-secondary-bg: #fffbf3;
+  --theme-btn-secondary-text: var(--ink);
+
+  /* Typography */
+  --theme-font-heading: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --theme-font-body: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+
+  /* Structural */
   --theme-border-width: 1px;
   --theme-border-style: solid;
   --theme-radius-sm: 6px;
-  --theme-radius-md: 8px;
-  --theme-radius-lg: 12px;
-  --theme-shadow-sm: 0 1px 2px 0;
-  --theme-shadow-md: 0 4px 6px -1px;
-  --theme-shadow-hover: 0 10px 15px -3px;
+  --theme-radius-md: 10px;
+  --theme-radius-lg: 16px;
   --theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
-  --theme-transition-duration: 0.2s;
-  --theme-heading-weight: 700;
-  --theme-heading-tracking: -0.025em;
-  --theme-body-line-height: 1.6;
+  --theme-transition-duration: 0.25s;
+
+  /* Headings */
+  --theme-heading-weight: 600;
+  --theme-heading-tracking: -0.015em;
+  --theme-body-line-height: 1.65;
   --theme-grid-gap: 2rem;
   --theme-card-padding: 1.5rem;
   --theme-heading-size-xs: 0.7rem;
-  --theme-heading-size-sm: 0.8rem;
-  --theme-heading-size-base: 0.9rem;
-  --theme-heading-size-lg: 1.25rem;
-  --theme-heading-size-xl: 1.5rem;
-  --theme-heading-size-2xl: 2rem;
-  --theme-heading-size-3xl: 2.5rem;
-}
-
-/* =============================================
-   COLLECTOR'S VAULT — Dark, premium, gold
-   ============================================= */
-[data-theme="vault"] {
-  --theme-bg-page: #0d0d0d;
-  --theme-bg-surface: #141414;
-  --theme-bg-surface-alt: #1a1a1a;
-  --theme-bg-surface-hover: #1f1f1f;
-  --theme-bg-elevated: #1a1a1a;
-  --theme-bg-footer: #080808;
-  --theme-bg-input: #141414;
-  --theme-bg-input-focus: #1a1a1a;
-  --theme-text-primary: #e8e8e8;
-  --theme-text-secondary: #a0a0a0;
-  --theme-text-muted: #666666;
-  --theme-text-inverted: #0d0d0d;
-  --theme-text-footer: #a0a0a0;
-  --theme-text-footer-heading: #c9a84c;
-  --theme-text-footer-muted: #666666;
-  --theme-accent-primary: #c9a84c;
-  --theme-accent-primary-hover: #d4af37;
-  --theme-accent-secondary: #1a1a1a;
-  --theme-accent-text-on-primary: #0d0d0d;
-  --theme-border-primary: #2a2a2a;
-  --theme-border-secondary: #1f1f1f;
-  --theme-border-input: #333333;
-  --theme-ring-focus: #c9a84c;
-  --theme-shadow-color: rgba(201, 168, 76, 0.12);
-  --theme-badge-bg: #1a1a1a;
-  --theme-badge-border: #333333;
-  --theme-badge-text: #c9a84c;
-  --theme-success: #27ae60;
-  --theme-warning: #f39c12;
-  --theme-error: #ef4444;
-  --theme-info: #60a5fa;
-  --theme-price-color: #c9a84c;
-  --theme-scrollbar-track: #141414;
-  --theme-scrollbar-thumb: #333333;
-  --theme-selection-bg: #c9a84c;
-  --theme-selection-text: #0d0d0d;
-  --theme-btn-primary-bg: transparent;
-  --theme-btn-primary-text: #c9a84c;
-  --theme-btn-primary-border: #c9a84c;
-  --theme-btn-secondary-bg: transparent;
-  --theme-btn-secondary-text: #e8e8e8;
-  --theme-font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
-  --theme-font-body: var(--font-geist-sans), system-ui, sans-serif;
-  --theme-border-width: 1px;
-  --theme-border-style: solid;
-  --theme-radius-sm: 2px;
-  --theme-radius-md: 4px;
-  --theme-radius-lg: 6px;
-  --theme-shadow-sm: 0 0 8px;
-  --theme-shadow-md: 0 0 15px;
-  --theme-shadow-hover: 0 0 25px;
-  --theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
-  --theme-transition-duration: 0.3s;
-  --theme-heading-weight: 400;
-  --theme-heading-tracking: 0.05em;
-  --theme-body-line-height: 1.7;
-  --theme-grid-gap: 1.5rem;
-  --theme-card-padding: 1.25rem;
-  --theme-heading-size-xs: 0.7rem;
-  --theme-heading-size-sm: 0.8rem;
+  --theme-heading-size-sm: 0.85rem;
   --theme-heading-size-base: 1rem;
-  --theme-heading-size-lg: 1.35rem;
-  --theme-heading-size-xl: 1.75rem;
-  --theme-heading-size-2xl: 2.25rem;
-  --theme-heading-size-3xl: 3rem;
+  --theme-heading-size-lg: 1.375rem;
+  --theme-heading-size-xl: 1.875rem;
+  --theme-heading-size-2xl: 2.5rem;
+  --theme-heading-size-3xl: 3.5rem;
 }
-
 
 /* =============================================
    TAILWIND @theme TOKENS
    ============================================= */
 @theme {
-  --font-pixel: var(--font-press-start), "Press Start 2P", monospace;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
 
   --color-theme-page: var(--theme-bg-page);
   --color-theme-surface: var(--theme-bg-surface);
@@ -234,6 +127,7 @@
   --color-theme-text-muted: var(--theme-text-muted);
   --color-theme-accent: var(--theme-accent-primary);
   --color-theme-accent-on: var(--theme-accent-text-on-primary);
+  --color-theme-accent-dark: var(--ember-dark);
   --color-theme-border: var(--theme-border-primary);
   --color-theme-border-secondary: var(--theme-border-secondary);
   --color-theme-ring: var(--theme-ring-focus);
@@ -253,6 +147,12 @@
   --color-theme-footer-heading: var(--theme-text-footer-heading);
   --color-theme-footer-muted: var(--theme-text-footer-muted);
 
+  --color-ink: #1e1208;
+  --color-parchment: #fdf8f0;
+  --color-parchment-alt: #f5ecda;
+  --color-ember: #c15c0a;
+  --color-ember-dark: #7a4f1e;
+
   --color-pokemon-primary: #ffcb05;
   --color-pokemon-secondary: #2a75bb;
   --color-yugioh-primary: #8b5cf6;
@@ -270,13 +170,14 @@
     color: var(--theme-text-primary);
     font-family: var(--theme-font-body);
     line-height: var(--theme-body-line-height);
+    -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, h4 {
     font-family: var(--theme-font-heading);
     font-weight: var(--theme-heading-weight);
     letter-spacing: var(--theme-heading-tracking);
-    line-height: 1.3;
+    line-height: 1.15;
   }
 
   ::selection {
@@ -329,73 +230,65 @@
 
   .font-body { font-family: var(--theme-font-body); }
 
-  .text-heading-xs { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-xs); line-height: 1.5; }
-  .text-heading-sm { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-sm); line-height: 1.5; }
-  .text-heading-base { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-base); line-height: 1.4; }
-  .text-heading-lg { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-lg); line-height: 1.3; }
-  .text-heading-xl { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-xl); line-height: 1.2; }
-  .text-heading-2xl { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-2xl); line-height: 1.2; }
-  .text-heading-3xl { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-3xl); line-height: 1.1; }
+  .text-heading-xs  { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-xs);  line-height: 1.4; }
+  .text-heading-sm  { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-sm);  line-height: 1.4; }
+  .text-heading-base{ font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-base);line-height: 1.3; }
+  .text-heading-lg  { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-lg);  line-height: 1.2; }
+  .text-heading-xl  { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-xl);  line-height: 1.15; }
+  .text-heading-2xl { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-2xl); line-height: 1.1; }
+  .text-heading-3xl { font-family: var(--theme-font-heading); font-weight: var(--theme-heading-weight); letter-spacing: var(--theme-heading-tracking); font-size: var(--theme-heading-size-3xl); line-height: 1.05; }
+
+  .eyebrow {
+    font-family: var(--theme-font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--theme-accent-primary);
+  }
 }
 
 /* =============================================
-   THEME VISIBILITY HELPERS
+   BUTTON & CARD BEHAVIORS
    ============================================= */
-[data-theme="catalogue"] .retro-only,
-[data-theme="vault"] .retro-only { display: none !important; }
-
-.catalogue-only, .catalogue-only-block { display: none !important; }
-[data-theme="catalogue"] .catalogue-only { display: inline !important; }
-[data-theme="catalogue"] .catalogue-only-block { display: block !important; }
-
-.vault-only, .vault-only-block { display: none !important; }
-[data-theme="vault"] .vault-only { display: inline !important; }
-[data-theme="vault"] .vault-only-block { display: block !important; }
-
-[data-theme="catalogue"] .catalogue-hide { display: none !important; }
-[data-theme="vault"] .vault-hide { display: none !important; }
-
-/* =============================================
-   RETRO: Button & Card behaviors (default)
-   ============================================= */
-:root .retro-btn:active {
-  transform: translate(2px, 2px);
+.retro-btn:active {
+  transform: translateY(1px);
   box-shadow: none;
 }
-:root .retro-card-hover:hover {
-  transform: translate(1px, 1px);
+.retro-card-hover {
+  transition: transform var(--theme-transition-duration) var(--theme-transition-timing),
+              box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
 }
-
-/* =============================================
-   CATALOGUE: Structural CSS
-   ============================================= */
-[data-theme="catalogue"] .retro-btn:active {
-  transform: scale(0.97) !important;
-  box-shadow: none;
-  opacity: 0.9;
-}
-[data-theme="catalogue"] .retro-card-hover:hover {
+.retro-card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--theme-shadow-hover) var(--theme-shadow-color);
 }
-[data-theme="catalogue"] .card-image-wrap .card-quick-view {
+.card-image-wrap .card-quick-view {
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
-[data-theme="catalogue"] .card-image-wrap:hover .card-quick-view {
+.card-image-wrap:hover .card-quick-view {
   opacity: 1;
+  transform: translateY(0);
 }
-[data-theme="catalogue"] .header-search-input {
+.header-search-input {
   border-radius: 999px !important;
   padding-left: 2.5rem !important;
+  background: var(--theme-bg-surface-alt) !important;
+  border-color: transparent !important;
 }
-[data-theme="catalogue"] .nav-dropdown {
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+.header-search-input:focus {
+  background: var(--theme-bg-surface) !important;
+  border-color: var(--theme-accent-primary) !important;
+}
+.nav-dropdown {
+  border-radius: var(--theme-radius-md);
+  box-shadow: 0 20px 50px -12px rgba(30, 18, 8, 0.18);
   overflow: hidden;
 }
-[data-theme="catalogue"] .price-current.has-discount {
-  color: #dc2626;
+.price-current.has-discount {
+  color: var(--ember-primary);
 }
 .sticky-atc-bar {
   position: fixed;
@@ -407,36 +300,27 @@
   transition: transform 0.3s ease;
   background: var(--theme-bg-surface);
   border-top: 1px solid var(--theme-border-primary);
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -8px 24px -8px var(--theme-shadow-color);
 }
 .sticky-atc-bar.visible {
   transform: translateY(0);
 }
 
 /* =============================================
-   VAULT: Structural CSS
+   DECORATIVE PATTERNS
    ============================================= */
-[data-theme="vault"] .retro-btn:active {
-  transform: scale(0.98) !important;
-  box-shadow: none;
+.parchment-grain {
+  background-color: var(--theme-bg-page);
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(193, 92, 10, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(122, 79, 30, 0.05) 0%, transparent 45%);
 }
-[data-theme="vault"] .retro-card-hover:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 30px rgba(201, 168, 76, 0.2);
-}
-[data-theme="vault"] .vault-hero-glow {
-  background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
-}
-.vault-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
-  border: none;
-  margin: 2rem 0;
-}
-[data-theme="vault"] .vault-card-minimal .card-description,
-[data-theme="vault"] .vault-card-minimal .card-badges,
-[data-theme="vault"] .vault-card-minimal .card-stock {
-  display: none;
+
+.ember-underline {
+  background-image: linear-gradient(to right, var(--ember-primary), var(--ember-dark));
+  height: 3px;
+  width: 48px;
+  border-radius: 999px;
 }
 
 /* =============================================
@@ -458,6 +342,10 @@
   animation-timing-function: var(--theme-transition-timing);
 }
 
-::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--theme-scrollbar-track); }
-::-webkit-scrollbar-thumb { background: var(--theme-scrollbar-thumb); }
+::-webkit-scrollbar-thumb {
+  background: var(--theme-scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid var(--theme-scrollbar-track);
+}

@@ -2,17 +2,29 @@
 
 import Link from "next/link";
 import { FOOTER_LINKS, SITE_NAME, SITE_TAGLINE } from "~/lib/constants";
-import { PixelCoin } from "~/components/ui/pixel-coin";
-import { PixelDivider } from "~/components/ui/pixel-divider";
-import { useTheme } from "~/components/theme/theme-provider";
 import { useToast } from "~/components/ui/toast";
+import {
+  TwitterIcon,
+  InstagramIcon,
+  DiscordIcon,
+  YouTubeIcon,
+  VisaLogo,
+  MastercardLogo,
+  AmexLogo,
+  PayPalLogo,
+  ApplePayLogo,
+  HuffcardsMark,
+} from "~/components/ui/brand-icons";
+
+const SOCIAL_LINKS = [
+  { label: "Twitter", href: "#", icon: TwitterIcon },
+  { label: "Instagram", href: "#", icon: InstagramIcon },
+  { label: "Discord", href: "#", icon: DiscordIcon },
+  { label: "YouTube", href: "#", icon: YouTubeIcon },
+];
 
 export function Footer() {
-  const { theme } = useTheme();
   const { addToast } = useToast();
-  const isRetro = theme === "retro";
-  const isCatalogue = theme === "catalogue";
-  const isVault = theme === "vault";
 
   const handleNewsletter = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,68 +32,81 @@ export function Footer() {
   };
 
   return (
-    <footer className="mt-16 border-t border-[var(--theme-border-primary)] bg-theme-footer text-theme-footer-text">
-      {/* Catalogue: Newsletter strip */}
-      {isCatalogue && (
-        <div className="border-b border-[var(--theme-border-primary)]">
-          <div className="mx-auto max-w-7xl px-4 py-10 md:flex md:items-center md:justify-between">
-            <div className="mb-4 md:mb-0">
-              <h3 className="text-base font-bold text-white">Stay in the loop</h3>
-              <p className="text-sm text-gray-400">New drops, exclusive deals, and restocks</p>
-            </div>
-            <form onSubmit={handleNewsletter} className="flex gap-2">
-              <input type="email" placeholder="you@example.com" className="rounded-full border border-gray-600 bg-transparent px-5 py-2.5 text-sm text-white placeholder:text-gray-500 focus:border-blue-500 focus:outline-none w-64" />
-              <button type="submit" className="rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">Subscribe</button>
-            </form>
+    <footer className="mt-20 bg-theme-footer text-theme-footer-text">
+      {/* Newsletter strip */}
+      <div style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+        <div className="mx-auto max-w-7xl px-4 py-12 md:flex md:items-center md:justify-between md:gap-12">
+          <div className="mb-5 md:mb-0">
+            <p className="eyebrow mb-2" style={{ color: "var(--ember-primary)" }}>
+              Join the binder
+            </p>
+            <h3 className="text-heading-xl text-white">Drops, restocks, and set reviews</h3>
+            <p className="mt-2 max-w-md text-sm text-theme-footer-muted">
+              One email a week. No spam, no reselling — we hate that too.
+            </p>
           </div>
+          <form onSubmit={handleNewsletter} className="flex w-full max-w-md gap-2">
+            <input
+              type="email"
+              placeholder="you@example.com"
+              className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white placeholder:text-white/40 focus:border-[var(--ember-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--ember-primary)]"
+            />
+            <button
+              type="submit"
+              className="rounded-full bg-[var(--ember-primary)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--ember-primary-hover)] transition-colors whitespace-nowrap"
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
-      )}
+      </div>
 
-      {/* Vault: Collector's Circle */}
-      {isVault && (
-        <div className="border-b border-[#1a1a1a]">
-          <div className="mx-auto max-w-7xl px-4 py-12 text-center">
-            <h3 className="text-lg text-[#c9a84c] mb-2" style={{fontFamily: 'var(--theme-font-heading)', letterSpacing: '0.05em'}}>Collector&apos;s Circle</h3>
-            <p className="text-sm text-[#666] mb-6">Early access to limited drops and market insights</p>
-            <form onSubmit={handleNewsletter} className="flex justify-center gap-2 max-w-md mx-auto">
-              <input type="email" placeholder="your@email.com" className="flex-1 border border-[#333] bg-transparent px-4 py-2.5 text-sm text-[#e8e8e8] placeholder:text-[#555] focus:border-[#c9a84c] focus:outline-none" />
-              <button type="submit" className="border border-[#c9a84c] bg-transparent px-6 py-2.5 text-sm text-[#c9a84c] hover:bg-[#c9a84c] hover:text-black transition-all duration-300 tracking-wider uppercase">Join</button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      <div className="mx-auto max-w-7xl px-4 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+      <div className="mx-auto max-w-7xl px-4 py-14">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
           {/* Brand */}
-          <div>
-            <div className="mb-3 flex items-center gap-2">
-              {isRetro && <span className="retro-only"><PixelCoin size={20} /></span>}
-              <span className="text-heading-sm text-theme-footer-heading">{SITE_NAME}</span>
+          <div className="col-span-2 md:col-span-2">
+            <div className="mb-4 flex items-center gap-2.5">
+              <HuffcardsMark size={32} />
+              <span className="font-heading text-xl text-white">
+                {SITE_NAME}
+                <span style={{ color: "var(--ember-primary)" }}>.</span>
+              </span>
             </div>
-            <p className="font-body text-xs text-theme-text-muted">
-              {isVault ? "Curated trading cards for the discerning collector" : SITE_TAGLINE}
+            <p className="mb-4 max-w-xs font-body text-sm leading-relaxed text-theme-footer-muted">
+              {SITE_TAGLINE}. Curated sealed product, honest pricing, and a team
+              who actually play the games.
             </p>
-            <p className="mt-3 font-body text-xs text-theme-text-secondary">
-              42 Card Lane, Bristol, BS1 4QA
+            <p className="mb-5 font-body text-xs text-theme-footer-muted">
+              42 Card Lane · Bristol BS1 4QA · UK
             </p>
-            {/* Catalogue: social icons */}
-            {isCatalogue && (
-              <div className="mt-4 flex gap-3">
-                {["Twitter", "Instagram", "Discord", "YouTube"].map(s => (
-                  <span key={s} className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-[10px] text-gray-400 hover:bg-gray-700 hover:text-white transition-colors cursor-pointer">{s[0]}</span>
-                ))}
-              </div>
-            )}
+            <div className="flex gap-2.5">
+              {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 hover:border-[var(--ember-primary)] hover:text-[var(--ember-primary)] transition-colors"
+                >
+                  <Icon size={15} />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Shop */}
           <div>
-            <h3 className="text-heading-xs mb-3 text-theme-footer-heading">Shop</h3>
-            <ul className="space-y-1.5">
+            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-white">
+              Shop
+            </h3>
+            <ul className="space-y-2.5">
               {FOOTER_LINKS.shop.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="font-body text-xs text-theme-text-muted hover:text-theme-accent transition-theme">{link.label}</Link>
+                  <Link
+                    href={link.href}
+                    className="font-body text-sm text-theme-footer-muted hover:text-[var(--ember-primary)] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -89,11 +114,18 @@ export function Footer() {
 
           {/* Info */}
           <div>
-            <h3 className="text-heading-xs mb-3 text-theme-footer-heading">Info</h3>
-            <ul className="space-y-1.5">
+            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-white">
+              Info
+            </h3>
+            <ul className="space-y-2.5">
               {FOOTER_LINKS.info.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="font-body text-xs text-theme-text-muted hover:text-theme-accent transition-theme">{link.label}</Link>
+                  <Link
+                    href={link.href}
+                    className="font-body text-sm text-theme-footer-muted hover:text-[var(--ember-primary)] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -101,33 +133,42 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="text-heading-xs mb-3 text-theme-footer-heading">Legal</h3>
-            <ul className="space-y-1.5">
+            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-white">
+              Legal
+            </h3>
+            <ul className="space-y-2.5">
               {FOOTER_LINKS.legal.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="font-body text-xs text-theme-text-muted hover:text-theme-accent transition-theme">{link.label}</Link>
+                  <Link
+                    href={link.href}
+                    className="font-body text-sm text-theme-footer-muted hover:text-[var(--ember-primary)] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        {isRetro && <div className="retro-only"><PixelDivider className="my-8" /></div>}
-
-        <div className={`flex flex-col items-center justify-between gap-4 md:flex-row ${isRetro ? "" : "mt-10 border-t border-[var(--theme-border-primary)] pt-6"}`}>
-          <p className="font-body text-xs text-theme-text-secondary">
+        {/* Bottom bar */}
+        <div
+          className="mt-14 flex flex-col items-center justify-between gap-6 pt-8 md:flex-row"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+        >
+          <p className="font-body text-xs text-theme-footer-muted">
             &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
           </p>
-          {/* Catalogue: payment icons */}
-          {isCatalogue && (
-            <div className="flex items-center gap-2 text-[10px] text-gray-500">
-              {["Visa", "Mastercard", "Amex", "PayPal", "Apple Pay"].map(p => (
-                <span key={p} className="rounded border border-gray-700 px-2 py-1">{p}</span>
-              ))}
-            </div>
-          )}
-          <p className="font-body text-xs text-theme-footer-muted">
-            Pokemon, Yu-Gi-Oh!, and Magic: The Gathering are trademarks of their respective owners.
+          <div className="flex items-center gap-1.5">
+            <VisaLogo />
+            <MastercardLogo />
+            <AmexLogo />
+            <PayPalLogo />
+            <ApplePayLogo />
+          </div>
+          <p className="max-w-xs text-center font-body text-[10px] leading-relaxed text-theme-footer-muted md:text-right">
+            Pokémon, Yu-Gi-Oh!, and Magic: The Gathering are trademarks of their
+            respective owners.
           </p>
         </div>
       </div>

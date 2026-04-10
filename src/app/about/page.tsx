@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "~/components/layout/breadcrumbs";
 import { RetroCard } from "~/components/ui/retro-card";
-import { PixelDivider } from "~/components/ui/pixel-divider";
-import { PixelCoin } from "~/components/ui/pixel-coin";
+import { HuffcardsMark } from "~/components/ui/brand-icons";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -16,7 +15,7 @@ export default function AboutPage() {
       <Breadcrumbs items={[{ label: "About Us" }]} />
 
       <div className="mb-8 text-center">
-        <PixelCoin size={48} className="mx-auto mb-4" />
+        <HuffcardsMark size={56} className="mx-auto mb-4" />
         <h1 className="text-heading-xl mb-2 text-theme-text">About HuffCards</h1>
         <p className="font-body text-sm text-theme-text-secondary">
           Your Friendly Local Card Shop, Online
@@ -42,8 +41,6 @@ export default function AboutPage() {
               every time you visit HuffCards.
             </p>
           </div>
-
-          <PixelDivider />
 
           <div>
             <h2 className="text-heading-sm mb-3 text-theme-accent">Our Values</h2>
@@ -78,8 +75,6 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-
-          <PixelDivider />
 
           <div>
             <h2 className="text-heading-sm mb-3 text-theme-accent">Where to Find Us</h2>

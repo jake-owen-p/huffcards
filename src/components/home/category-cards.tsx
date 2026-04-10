@@ -1,10 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-
 import Link from "next/link";
-import { categories } from "~/data";
-import { RetroCard } from "~/components/ui/retro-card";
-import { useTheme } from "~/components/theme/theme-provider";
+import { categories, allProducts } from "~/data";
+import type { Category } from "~/data/types";
 
 const categoryLogos: Record<string, string> = {
   pokemon: "/logos/pokemon.svg",
@@ -12,107 +9,125 @@ const categoryLogos: Record<string, string> = {
   magic: "/logos/magic.png",
 };
 
-function RetroCategoryCards() {
-  return (
-    <section className="mx-auto max-w-7xl px-4 py-16">
-      <h2 className="text-heading-lg mb-8 text-center text-theme-text">
-        Shop by Game
-      </h2>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {categories.map((cat) => (
-          <Link key={cat.slug} href={`/${cat.slug}`}>
-            <RetroCard hover className="p-6 text-center">
-              <div className="mx-auto mb-4 flex h-20 w-48 items-center justify-center">
-                <img
-                  src={categoryLogos[cat.slug]}
-                  alt={cat.name}
-                  className="max-h-full max-w-full object-contain"
-                />
-              </div>
-              <h3 className="text-heading-sm mb-2 text-theme-text">
-                {cat.shortName}
-              </h3>
-              <p className="font-body text-xs text-theme-text-secondary">
-                {cat.productCount} products
-              </p>
-            </RetroCard>
-          </Link>
-        ))}
-      </div>
-    </section>
-  );
-}
+const taglines: Record<string, string> = {
+  pokemon: "Gotta catch 'em all",
+  yugioh: "It's time to duel",
+  magic: "Planeswalkers, assemble",
+};
 
-function CatalogueCategoryCards() {
-  return (
-    <section className="mx-auto max-w-7xl px-4 py-16">
-      <h2 className="text-heading-lg mb-8 text-center text-theme-text">
-        Shop by Game
-      </h2>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {categories.map((cat) => (
-          <Link key={cat.slug} href={`/${cat.slug}`}>
-            <div
-              className="group relative overflow-hidden rounded-2xl p-8 text-center transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
-              style={{ background: `linear-gradient(135deg, ${cat.color}15, ${cat.color}30)` }}
-            >
-              <div className="mx-auto mb-4 flex h-24 w-52 items-center justify-center">
-                <img
-                  src={categoryLogos[cat.slug]}
-                  alt={cat.name}
-                  className="max-h-full max-w-full object-contain"
-                />
-              </div>
-              <h3 className="text-lg font-bold text-[var(--theme-text-primary)] mb-2">
-                {cat.shortName}
-              </h3>
-              <span
-                className="inline-block rounded-full px-4 py-1 text-xs font-medium"
-                style={{ background: `${cat.color}20`, color: cat.color }}
-              >
-                {cat.productCount} products
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function VaultCategoryCards() {
-  return (
-    <section className="mx-auto max-w-7xl px-4 py-16">
-      <h2 className="text-heading-lg mb-8 text-center text-theme-text">
-        Collections
-      </h2>
-      <div className="space-y-4">
-        {categories.map((cat) => (
-          <Link key={cat.slug} href={`/${cat.slug}`}>
-            <div
-              className="group relative flex items-center justify-center py-10 border border-[#1a1a1a] hover:border-[#c9a84c33] transition-all duration-500"
-              style={{ background: `linear-gradient(135deg, #0d0d0d, ${cat.color}08)` }}
-            >
-              <img
-                src={categoryLogos[cat.slug]}
-                alt={cat.name}
-                className="h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-              />
-              <span className="absolute right-8 text-xs text-[#666] tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Explore →
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </section>
-  );
+function previewProducts(category: Category) {
+  return allProducts
+    .filter((p) => p.category === category && p.featured)
+    .slice(0, 3);
 }
 
 export function CategoryCards() {
-  const { theme } = useTheme();
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-20">
+      <div className="mb-12 flex items-end justify-between">
+        <div>
+          <p className="eyebrow mb-2">Browse the binder</p>
+          <h2 className="text-heading-xl md:text-heading-2xl text-theme-text">
+            Shop by game
+          </h2>
+        </div>
+        <Link
+          href="/search"
+          className="hidden text-sm font-medium text-theme-text-secondary hover:text-[var(--ember-primary)] md:inline-block"
+        >
+          View all →
+        </Link>
+      </div>
 
-  if (theme === "catalogue") return <CatalogueCategoryCards />;
-  if (theme === "vault") return <VaultCategoryCards />;
-  return <RetroCategoryCards />;
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+        {categories.map((cat) => {
+          const previews = previewProducts(cat.slug);
+          return (
+            <Link
+              key={cat.slug}
+              href={`/${cat.slug}`}
+              className="group relative flex flex-col overflow-hidden bg-theme-surface transition-all hover:-translate-y-1"
+              style={{
+                border: "1px solid var(--theme-border-primary)",
+                borderRadius: "var(--theme-radius-lg)",
+                boxShadow: "0 4px 20px -8px rgba(30, 18, 8, 0.08)",
+              }}
+            >
+              {/* Color strip */}
+              <div
+                className="h-1.5 w-full"
+                style={{ background: cat.color }}
+              />
+
+              {/* Header */}
+              <div className="flex items-center justify-between gap-4 px-6 pt-6 pb-4">
+                <div>
+                  <p className="eyebrow mb-1" style={{ color: cat.color }}>
+                    {cat.productCount} products
+                  </p>
+                  <h3 className="font-heading text-2xl font-semibold text-theme-text">
+                    {cat.shortName}
+                  </h3>
+                  <p className="mt-1 text-sm text-theme-text-secondary">
+                    {taglines[cat.slug]}
+                  </p>
+                </div>
+                <div className="flex h-14 w-20 shrink-0 items-center justify-center">
+                  <img
+                    src={categoryLogos[cat.slug]}
+                    alt={cat.name}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+              </div>
+
+              {/* Product preview strip */}
+              <div
+                className="relative mt-auto flex h-44 items-end justify-center gap-2 px-6 pt-4 pb-6"
+                style={{
+                  background: `linear-gradient(180deg, transparent 0%, ${cat.color}12 100%)`,
+                  borderTop: "1px solid var(--theme-border-secondary)",
+                }}
+              >
+                {previews.map((p, i) => (
+                  <div
+                    key={p.id}
+                    className="flex h-32 w-24 items-center justify-center overflow-hidden rounded-md bg-white p-2 transition-transform group-hover:translate-y-[-4px]"
+                    style={{
+                      transform: `rotate(${(i - 1) * 4}deg)`,
+                      transformOrigin: "bottom",
+                      transitionDelay: `${i * 40}ms`,
+                      border: "1px solid rgba(30,18,8,0.08)",
+                      boxShadow: "0 6px 16px -8px rgba(30,18,8,0.25)",
+                    }}
+                  >
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="max-h-full max-w-full object-contain"
+                      draggable={false}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer CTA */}
+              <div
+                className="flex items-center justify-between px-6 py-4 text-sm font-semibold text-theme-text"
+                style={{ borderTop: "1px solid var(--theme-border-secondary)" }}
+              >
+                Shop {cat.shortName}
+                <span
+                  className="transition-transform group-hover:translate-x-1"
+                  style={{ color: "var(--ember-primary)" }}
+                >
+                  →
+                </span>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    </section>
+  );
 }

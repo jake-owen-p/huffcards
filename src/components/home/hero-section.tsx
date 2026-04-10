@@ -1,124 +1,143 @@
-"use client";
-
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { RetroButton } from "~/components/ui/retro-button";
-import { PixelCoin } from "~/components/ui/pixel-coin";
-import { useTheme } from "~/components/theme/theme-provider";
-import { allProducts } from "~/data";
-
-function RetroHero() {
-  return (
-    <section className="relative overflow-hidden border-b border-[var(--theme-border-primary)] bg-theme-surface py-16 md:py-24">
-      {/* Decorative coins */}
-      <div className="retro-only">
-        <div className="pointer-events-none absolute top-6 left-8 opacity-20">
-          <PixelCoin size={48} />
-        </div>
-        <div className="pointer-events-none absolute right-12 bottom-10 opacity-15">
-          <PixelCoin size={64} />
-        </div>
-        <div className="pointer-events-none absolute top-1/3 right-1/4 opacity-10">
-          <PixelCoin size={32} />
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-4xl px-4 text-center">
-        <h1 className="text-heading-2xl md:text-heading-3xl mb-4 text-theme-text">
-          HuffCards
-        </h1>
-        <p className="mx-auto mb-2 max-w-xl font-body text-lg text-theme-price">
-          Your Friendly Local Card Shop, Online
-        </p>
-        <p className="mx-auto mb-8 max-w-lg font-body text-sm text-theme-text-secondary">
-          Pokemon &bull; Yu-Gi-Oh! &bull; Magic: The Gathering
-          <br />
-          Booster boxes, ETBs, singles & more at great prices.
-        </p>
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link href="/pokemon">
-            <RetroButton variant="primary" size="lg">
-              Browse Cards
-            </RetroButton>
-          </Link>
-          <Link href="/search?q=new">
-            <RetroButton variant="secondary" size="lg">
-              New Arrivals
-            </RetroButton>
-          </Link>
-        </div>
-
-        {/* Retro decorative bar */}
-        <div className="retro-only">
-          <div className="mt-12 flex items-center justify-center gap-2">
-            {Array.from({ length: 7 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-2 w-2 bg-theme-accent"
-                style={{ opacity: i % 2 === 0 ? 1 : 0.4 }}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CatalogueHero() {
-  return (
-    <section className="bg-gradient-to-br from-blue-600 to-blue-800 py-20 md:py-28">
-      <div className="mx-auto max-w-5xl px-4 text-center">
-        <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
-          Your Favourite Trading Cards, Delivered
-        </h1>
-        <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-          Pokemon, Yu-Gi-Oh! and Magic: The Gathering — sealed products at great prices
-        </p>
-        <Link href="/pokemon">
-          <button className="bg-white text-blue-700 font-semibold px-8 py-3.5 rounded-full text-base hover:bg-blue-50 transition-all">
-            Shop Now
-          </button>
-        </Link>
-        <div className="flex items-center justify-center gap-8 mt-12 text-sm text-blue-200">
-          <span>{allProducts.length}+ Products</span>
-          <span className="w-1 h-1 rounded-full bg-blue-400" />
-          <span>Free UK Shipping Over £50</span>
-          <span className="w-1 h-1 rounded-full bg-blue-400" />
-          <span>100% Authentic</span>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function VaultHero() {
-  return (
-    <section className="relative py-24 md:py-36 overflow-hidden" style={{ background: '#0d0d0d' }}>
-      <div className="vault-hero-glow absolute inset-0" />
-      <div className="relative mx-auto max-w-4xl px-4 text-center">
-        <h1
-          className="text-4xl md:text-6xl text-[#c9a84c] mb-6"
-          style={{ fontFamily: 'var(--theme-font-heading)', fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase' }}
-        >
-          The Collector&apos;s Vault
-        </h1>
-        <p className="text-lg text-[#a0a0a0] mb-10 tracking-wide">
-          Curated. Authenticated. Yours.
-        </p>
-        <Link href="/pokemon">
-          <button className="border border-[#c9a84c] bg-transparent text-[#c9a84c] px-10 py-3.5 text-sm tracking-widest uppercase hover:bg-[#c9a84c] hover:text-[#0d0d0d] transition-all duration-300">
-            Explore the Collection
-          </button>
-        </Link>
-      </div>
-    </section>
-  );
-}
+import { getFeaturedProducts } from "~/data";
 
 export function HeroSection() {
-  const { theme } = useTheme();
+  // Pull 4 real product images to fan into the hero composition
+  const heroStack = getFeaturedProducts(8).slice(0, 4);
 
-  if (theme === "catalogue") return <CatalogueHero />;
-  if (theme === "vault") return <VaultHero />;
-  return <RetroHero />;
+  return (
+    <section
+      className="parchment-grain relative overflow-hidden"
+      style={{
+        borderBottom: "1px solid var(--theme-border-primary)",
+      }}
+    >
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 py-16 md:grid-cols-[1.1fr_1fr] md:gap-8 md:py-24 lg:py-28">
+        {/* Left: copy */}
+        <div className="flex flex-col justify-center">
+          <p className="eyebrow mb-5">Trading cards · Est. 2020 · Bristol</p>
+          <h1 className="text-heading-2xl md:text-heading-3xl mb-6 text-theme-text">
+            Sealed product.
+            <br />
+            Fair prices.
+            <br />
+            <span style={{ color: "var(--ember-primary)" }}>
+              Real card shop.
+            </span>
+          </h1>
+          <p className="mb-8 max-w-lg font-body text-base leading-relaxed text-theme-text-secondary md:text-lg">
+            Pokémon, Yu-Gi-Oh! and Magic: The Gathering — booster boxes, ETBs,
+            collection boxes, and singles curated by people who actually play
+            the games.
+          </p>
+
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/pokemon"
+              className="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-all hover:brightness-110"
+              style={{ background: "var(--ink)" }}
+            >
+              Shop Pokémon →
+            </Link>
+            <Link
+              href="/search?q=new"
+              className="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold transition-all hover:bg-theme-surface-alt"
+              style={{
+                border: "1px solid var(--theme-border-primary)",
+                color: "var(--ink)",
+              }}
+            >
+              New arrivals
+            </Link>
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-theme-text-secondary">
+            <span className="flex items-center gap-2">
+              <span
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ background: "var(--ember-success)" }}
+              />
+              Free UK shipping £50+
+            </span>
+            <span className="flex items-center gap-2">
+              <span
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ background: "var(--ember-success)" }}
+              />
+              100% authentic
+            </span>
+            <span className="flex items-center gap-2">
+              <span
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ background: "var(--ember-success)" }}
+              />
+              14-day returns
+            </span>
+          </div>
+        </div>
+
+        {/* Right: layered product stack */}
+        <div className="relative hidden h-[460px] md:block">
+          {/* Soft radial highlight */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse at 55% 50%, rgba(193, 92, 10, 0.12) 0%, transparent 60%)",
+            }}
+          />
+          {heroStack.map((p, i) => {
+            const positions = [
+              { rot: -14, x: -120, y: 20, z: 1 },
+              { rot: -4, x: -40, y: -10, z: 2 },
+              { rot: 6, x: 40, y: 10, z: 3 },
+              { rot: 16, x: 120, y: 40, z: 2 },
+            ];
+            const pos = positions[i]!;
+            return (
+              <div
+                key={p.id}
+                className="absolute left-1/2 top-1/2 h-[340px] w-[240px] overflow-hidden rounded-xl bg-white transition-transform duration-500 hover:z-50 hover:-translate-y-2"
+                style={{
+                  transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) rotate(${pos.rot}deg)`,
+                  boxShadow: "0 30px 60px -20px rgba(30, 18, 8, 0.25), 0 8px 20px -8px rgba(30, 18, 8, 0.15)",
+                  border: "1px solid var(--theme-border-primary)",
+                  zIndex: pos.z,
+                }}
+              >
+                <img
+                  src={p.image}
+                  alt={p.name}
+                  className="h-full w-full object-contain p-4"
+                  draggable={false}
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Mobile: horizontal scroll of 4 product thumbs */}
+        <div className="flex gap-3 overflow-x-auto pb-2 md:hidden">
+          {heroStack.map((p) => (
+            <div
+              key={p.id}
+              className="flex h-48 w-36 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-3"
+              style={{
+                border: "1px solid var(--theme-border-primary)",
+                boxShadow: "0 8px 20px -8px rgba(30, 18, 8, 0.15)",
+              }}
+            >
+              <img
+                src={p.image}
+                alt={p.name}
+                className="max-h-full max-w-full object-contain"
+                draggable={false}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

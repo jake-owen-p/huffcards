@@ -1,117 +1,161 @@
-"use client";
+import { ShieldIcon, TruckIcon, ReturnIcon, StarIcon } from "~/components/ui/icons";
 
-import { PixelCoin } from "~/components/ui/pixel-coin";
-import { PixelDivider } from "~/components/ui/pixel-divider";
-import { ShieldIcon, TruckIcon, ReturnIcon } from "~/components/ui/icons";
-import { useTheme } from "~/components/theme/theme-provider";
+const TRUST_POINTS = [
+  {
+    icon: TruckIcon,
+    title: "Free UK shipping",
+    body: "On orders over £50, dispatched within 24 hours from our Bristol warehouse.",
+  },
+  {
+    icon: ShieldIcon,
+    title: "100% authentic",
+    body: "Every sealed product verified. Sourced directly or from trusted distributors.",
+  },
+  {
+    icon: ReturnIcon,
+    title: "14-day returns",
+    body: "Changed your mind? Return any unopened product for a full refund.",
+  },
+  {
+    icon: StarIcon,
+    title: "Real people",
+    body: "Questions? A human who plays the game will answer you, usually within the hour.",
+  },
+];
 
-function RetroCommunitySection() {
+const TESTIMONIALS = [
+  {
+    initials: "JH",
+    name: "James H.",
+    location: "Manchester",
+    rating: 5,
+    quote:
+      "Ordered a Scarlet & Violet booster box on Tuesday, arrived Thursday morning, perfectly sealed. Exactly the card shop experience I was missing.",
+  },
+  {
+    initials: "AP",
+    name: "Aisha P.",
+    location: "London",
+    rating: 5,
+    quote:
+      "I spent ages looking for the right MTG bundle and the team actually recommended one they thought I'd like. It was spot on. Will be back.",
+  },
+  {
+    initials: "TO",
+    name: "Tom O.",
+    location: "Edinburgh",
+    rating: 5,
+    quote:
+      "Fair prices, honest stock counts, fast shipping. What more do you want from a card shop? Already ordered twice this month.",
+  },
+];
+
+function InitialAvatar({ initials }: { initials: string }) {
   return (
-    <section className="border-t border-[var(--theme-border-primary)] bg-theme-surface py-16">
-      <div className="mx-auto max-w-4xl px-4 text-center">
-        <div className="retro-only"><PixelDivider /></div>
-        <div className="retro-only">
-          <div className="mb-6 flex justify-center gap-3">
-            <PixelCoin size={24} />
-            <PixelCoin size={24} />
-            <PixelCoin size={24} />
-          </div>
-        </div>
-        <h2 className="text-heading-lg mb-4 text-theme-text">
-          Welcome to the Community
-        </h2>
-        <p className="mx-auto mb-6 max-w-lg font-body text-sm text-theme-text-secondary">
-          HuffCards isn&apos;t just a shop &mdash; it&apos;s a community. Whether you&apos;re
-          a seasoned collector or cracking your first pack, you&apos;ll find friendly
-          advice, fair prices, and a passion for the game.
-        </p>
-        <div className="grid grid-cols-1 gap-6 text-left md:grid-cols-3">
-          <div className="border-theme bg-theme-surface-alt p-5">
-            <p className="text-heading-xs mb-2 text-theme-accent">01 // Fair Prices</p>
-            <p className="font-body text-xs text-theme-text-secondary">
-              We keep our prices competitive so everyone can enjoy the hobby.
-              No scalping, no gouging.
-            </p>
-          </div>
-          <div className="border-theme bg-theme-surface-alt p-5">
-            <p className="text-heading-xs mb-2 text-theme-accent">02 // Fast Shipping</p>
-            <p className="font-body text-xs text-theme-text-secondary">
-              Orders dispatched within 24 hours. Free UK delivery over &pound;50.
-              Your cards, quickly and safely.
-            </p>
-          </div>
-          <div className="border-theme bg-theme-surface-alt p-5">
-            <p className="text-heading-xs mb-2 text-theme-accent">03 // Card Shop Vibes</p>
-            <p className="font-body text-xs text-theme-text-secondary">
-              That feeling of walking into your local game store? We bring
-              that energy online. Pull up a chair.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CatalogueCommunitySection() {
-  return (
-    <section className="py-16" style={{ background: '#f0f7ff' }}>
-      <div className="mx-auto max-w-5xl px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div>
-            <TruckIcon size={32} className="mx-auto mb-3 text-blue-600" />
-            <h3 className="text-base font-bold text-gray-900 mb-1">Free UK Shipping</h3>
-            <p className="text-sm text-gray-500">On all orders over £50</p>
-          </div>
-          <div>
-            <ShieldIcon size={32} className="mx-auto mb-3 text-blue-600" />
-            <h3 className="text-base font-bold text-gray-900 mb-1">100% Authentic</h3>
-            <p className="text-sm text-gray-500">Every product guaranteed genuine</p>
-          </div>
-          <div>
-            <ReturnIcon size={32} className="mx-auto mb-3 text-blue-600" />
-            <h3 className="text-base font-bold text-gray-900 mb-1">14-Day Returns</h3>
-            <p className="text-sm text-gray-500">Hassle-free return policy</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function VaultCommunitySection() {
-  return (
-    <section className="py-20" style={{ background: '#0a0a0a' }}>
-      <div className="mx-auto max-w-4xl px-4 text-center">
-        <h2
-          className="text-2xl mb-12 text-[#c9a84c]"
-          style={{ fontFamily: 'var(--theme-font-heading)', letterSpacing: '0.05em' }}
-        >
-          The Vault Promise
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="border-t-2 border-[#c9a84c] pt-6">
-            <h3 className="text-base font-medium text-[#e8e8e8] mb-2">Authentication</h3>
-            <p className="text-sm text-[#888]">Every product verified genuine. No fakes, no reprints, no compromises.</p>
-          </div>
-          <div className="border-t-2 border-[#c9a84c] pt-6">
-            <h3 className="text-base font-medium text-[#e8e8e8] mb-2">Protected Storage</h3>
-            <p className="text-sm text-[#888]">Climate-controlled warehouse. Your investment treated with the care it deserves.</p>
-          </div>
-          <div className="border-t-2 border-[#c9a84c] pt-6">
-            <h3 className="text-base font-medium text-[#e8e8e8] mb-2">Expert Curation</h3>
-            <p className="text-sm text-[#888]">Hand-selected inventory by collectors who understand the market.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div
+      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-heading text-sm font-semibold"
+      style={{
+        background: "var(--ink)",
+        color: "var(--parchment-base)",
+        border: "2px solid var(--ember-primary)",
+      }}
+    >
+      {initials}
+    </div>
   );
 }
 
 export function CommunitySection() {
-  const { theme } = useTheme();
+  return (
+    <>
+      {/* Trust points */}
+      <section
+        className="py-16"
+        style={{
+          background: "var(--theme-bg-surface-alt)",
+          borderTop: "1px solid var(--theme-border-primary)",
+          borderBottom: "1px solid var(--theme-border-primary)",
+        }}
+      >
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+            {TRUST_POINTS.map(({ icon: Icon, title, body }) => (
+              <div key={title} className="flex gap-4">
+                <div
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full"
+                  style={{
+                    background: "var(--theme-bg-surface)",
+                    border: "1px solid var(--theme-border-primary)",
+                    color: "var(--ember-primary)",
+                  }}
+                >
+                  <Icon size={20} />
+                </div>
+                <div>
+                  <h3 className="mb-1 font-heading text-base font-semibold text-theme-text">
+                    {title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-theme-text-secondary">
+                    {body}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-  if (theme === "catalogue") return <CatalogueCommunitySection />;
-  if (theme === "vault") return <VaultCommunitySection />;
-  return <RetroCommunitySection />;
+      {/* Testimonials */}
+      <section className="py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mb-12 text-center">
+            <p className="eyebrow mb-3">Word of mouth</p>
+            <h2 className="text-heading-xl md:text-heading-2xl text-theme-text">
+              Loved by collectors
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+            {TESTIMONIALS.map((t) => (
+              <figure
+                key={t.name}
+                className="flex flex-col gap-5 p-6"
+                style={{
+                  background: "var(--theme-bg-surface)",
+                  border: "1px solid var(--theme-border-primary)",
+                  borderRadius: "var(--theme-radius-lg)",
+                  boxShadow: "0 4px 20px -8px rgba(30, 18, 8, 0.06)",
+                }}
+              >
+                <div className="flex gap-0.5">
+                  {Array.from({ length: t.rating }).map((_, i) => (
+                    <StarIcon
+                      key={i}
+                      size={14}
+                      filled
+                      className="text-[var(--ember-primary)]"
+                    />
+                  ))}
+                </div>
+                <blockquote className="flex-1 font-body text-[15px] leading-relaxed text-theme-text">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <figcaption className="flex items-center gap-3">
+                  <InitialAvatar initials={t.initials} />
+                  <div>
+                    <p className="text-sm font-semibold text-theme-text">
+                      {t.name}
+                    </p>
+                    <p className="text-xs text-theme-text-muted">
+                      {t.location}
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }
